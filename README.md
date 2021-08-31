@@ -1,4 +1,4 @@
-# EE310-projects
+# EE310-labs
 Labs done over the course of the Spring 2021 semester. Taught by Professor Paul Bakke
 
 Lab 1: 2 input or gate, 3 input and gate.
