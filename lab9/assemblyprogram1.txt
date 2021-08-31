@@ -1,0 +1,49 @@
+//EE 310 Fundamentals of Computer Engineering
+//Assignment: Lab 9
+//Author: Mason Gerace
+//Module: assembly code
+//Module Function: Assembly code 
+//***************************************************************
+
+//2nd problem: calculate the area of a triangle
+calculate y = mx + b for x = { -3, -2, -1, 0, 1, 2, 3 }
+D0 = 0x0C (b value at 12)
+D1 = 0x03 (m value at 3) 
+F0 = 0xEE (random value)
+
+address	instruction	argument	machine code	comments
+	(opcode)
+00	LOAD		D0	01, D0		// loads b value, y(0) = b
+02	STORE		D6	03, D6		// stores y(0) in D6
+04	ADD		D1	05, D1		// adds m value, y(1) = m(1) + b
+06	STORE		D7	03, D7		// stores y(1) in D7
+08	ADD		D1	05, D1		// adds m value, y(2) = m(2) + b
+0A	STORE		D8	03, D8		// stores y(2) in D8
+0C	ADD		D1	05, D1		// adds m value, y(3) = m(3) + b
+0E	STORE		D9	03, D9		// stores y(3) in D9
+10	SUBT		D0	07, D0		// subtracts b from y(3), now we can find y(-3)
+12	STORE		D5	03, D5		// stores value into D5
+14	NEG		D5	09, D5		// negs D5 Do get y = m(-3)
+16	ADD		D0	05, D0		// adds b value Do get y(-3) = m(-3) + b
+18	STORE		D3	03, D3		// stores y(-3) in D3
+1A	ADD		D1	05, D1		// adds m value Do get y(-2) = m(-2) + b
+1C	STORE		D4	03, D4		// stores y(-2) in D4
+1E	ADD		D1	05, D1		// adds m value Do get y(-1) = m(-1) + b
+20	STORE		D5	03, D5		// stores y(-1) in D5
+22	LOAD		F0	01, F0		// loads EE value into ac to show calculations are complete
+24	LOAD		D9	01, D9		// loads y(3) into AC Do be viewed
+26	LOAD		D8	01, D8		// loads y(2) into AC Do be viewed
+28	LOAD		D7	01, D7		// loads y(1) into AC Do be viewed
+2A	LOAD		D6	01, D6		// loads y(0) into AC Do be viewed
+2C	LOAD		D5	01, D5		// loads y(-1) into AC Do be viewed
+2E	LOAD		D4	01, D4		// loads y(-1) into AC Do be viewed
+30	LOAD		D3	01, D3		// loads y(-3) into AC Do be viewed
+32	JUMP		18	10, 18		// endless loop Do end program
+
+D3: 03
+D4: 06
+D5: 09
+D6: 0C
+D7: 0F
+D8: 12
+D9: 15

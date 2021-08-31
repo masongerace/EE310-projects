@@ -1,0 +1,53 @@
+//EE 310 Fundamentals of Computer Engineering
+//Assignment: Lab 9
+//Author: Mason Gerace
+//Module: assembly code
+//Module Function: Assembly code 
+//***************************************************************
+
+calculate area of a triangle: (b*h) / 2
+D0 = (A) = 4
+D1 = (C) = 8
+D2 = n (loop counter) = 4
+D3 = (B)
+D4 = (D)
+D8 = result
+D9 = EE
+
+address	label	instruction	argument	machine code	comments
+		(opcode)
+
+
+00	start	CLR			04
+01		NOP			00
+02		LOAD			02, D0		//loads A
+04	Loop	AND		01	0B, 01		// masking LSB if odd
+06		JZERO	  'Shift'	13, 14		// if lsb = 0 skip this
+08		LOAD		D8	01, D8		// load result into ac	
+0A		ADD		01	05, 01		// add 1 to result
+0C		STORE		D4	03, D4		// store temp result
+0E	Shift	LOAD		D2	01, D2		// load i into ac
+10		SUBTI		01	08, 01		// (i = i - 1) decrement loop counter
+12		JZERO 	'FinishUp'	13, 2C		// no more shifts left
+14		STORE		D2	03, D2		// stores counter
+16		LOAD		D0	01, D0		// loads A into ac
+18		SHL		01	0E, 01		// SHL: = A * 2
+1A		STORE		D0	03, D0		// stores result of A*2
+1C		LOAD		D1	01, D1		// loads C into ac
+1E		SHR		01	0F, 01		// SHR: C/2
+20		STORE		D1	03, D1		// stores result of C/2
+22		LOAD		D3	01, D3		// loads B into ac
+24		SHL		01	0E, 01		// SHL: = B * 2
+26		STORE		D3	03, D3		// stores result of B*2
+28		LOAD		D4	01, D4		// loads D into ac
+2A		SHR		01	0F, 01		// SHR: D/2
+2C		STORE		D4	03, D4		// stores result of D/2
+2E		LOAD		D9	03, D9		// loads EE into ac to show end of loop iteration
+30		JUMP	   'Loop'	10, 0A		// loops til counter = 0
+32 FinishUp	LOAD		D3	01, D3		// loads result of BxD into AC
+34		NOT		D3	0A, D3		// nots BD to get ~(BD)
+36		ADD		D0	05, D0		// adds AC + (~BD)
+38		STORE		D8	03, D8		// stores result in D8
+3A		NOT		D8	0A, D8		// final not to get ~(AC + ~(BD) )
+3C		STORE		D8	03, D8		// stores final answer
+3E	Done	JUMP	     'Done'	10, 38		// inifinite loop to end 
